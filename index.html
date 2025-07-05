@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jeemboombaah!!</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin />
+  <link
+    rel="stylesheet"
+    as="style"
+    onload="this.rel='stylesheet'"
+    href="https://fonts.googleapis.com/css2?display=swap&family=Lexend:wght@400;500;700;900&family=Noto+Sans:wght@400;500;700;900"
+  />
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+</head>
+<body style='font-family: Lexend, "Noto Sans", sans-serif;'>
+  <div class="relative flex min-h-screen flex-col bg-white justify-between overflow-x-hidden">
+    <!-- Header -->
+    <div class="flex items-center bg-white p-4 pb-2 justify-between">
+      <div class="text-[#181310] flex size-12 items-center">
+        <!-- X Icon -->
+        <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
+          <path d="M205.66,194.34a8,8,0,0,1-11.32,11.32L128,139.31..." />
+        </svg>
+      </div>
+      <h2 class="text-[#181310] text-lg font-bold text-center flex-1">Jeemboombaah!!</h2>
+      <div class="flex w-12 justify-end">
+        <button>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
+            <path d="M155.51,24.81a8,8,0,0,0-8.42.88L77.25..." />
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Progress -->
+    <div class="flex flex-col gap-3 p-4">
+      <p id="progressLabel" class="text-[#181310] text-base font-medium">Question 1 of 5</p>
+      <div class="rounded bg-[#e7dfda]">
+        <div id="progressFill" class="h-2 rounded bg-[#181310]" style="width: 20%;"></div>
+      </div>
+    </div>
+
+    <!-- Mascot Image -->
+    <div class="flex w-full grow bg-white p-4">
+      <div class="w-full aspect-[2/3] rounded-xl flex">
+        <div
+          id="mascotImg"
+          class="w-full bg-center bg-no-repeat bg-cover flex-1"
+          style="background-image: url('https://via.placeholder.com/300x400?text=Q1');"
+        ></div>
+      </div>
+    </div>
+
+    <!-- Question Text -->
+    <p id="questionText" class="text-[#181310] text-base font-normal text-center pb-3 pt-1 px-4">
+      Is it an animal?
+    </p>
+
+    <!-- Buttons -->
+    <div class="flex justify-center">
+      <div class="flex flex-1 gap-3 max-w-[480px] flex-col items-stretch px-4 py-3">
+        <button data-btn="yes" class="h-12 px-5 rounded-full bg-[#ff5e00] text-white font-bold">Yes</button>
+        <button data-btn="no" class="h-12 px-5 rounded-full bg-[#ff5e00] text-white font-bold">No</button>
+        <button data-btn="skip" class="h-12 px-5 rounded-full bg-[#f5f2f0] text-[#181310] font-bold">Skip</button>
+      </div>
+    </div>
+
+    <!-- Bottom Nav -->
+    <div class="flex gap-2 border-t border-[#f5f2f0] bg-white px-4 pb-3 pt-2">
+      <a class="flex flex-1 flex-col items-center gap-1 text-[#181310]"><svg width="24" height="24"><circle cx="12" cy="12" r="10"/></svg></a>
+      <a class="flex flex-1 flex-col items-center gap-1 text-[#8d6f5e]"><svg width="24" height="24"><circle cx="12" cy="12" r="10"/></svg></a>
+      <a class="flex flex-1 flex-col items-center gap-1 text-[#8d6f5e]"><svg width="24" height="24"><circle cx="12" cy="12" r="10"/></svg></a>
+    </div>
+    <div class="h-5 bg-white"></div>
+  </div>
+
+  <!-- JavaScript Logic -->
+ <script type="module">
+/* 1️⃣  Put your five images in /assets.
+        Name them genie1.png … genie5.png (or change the paths here).       */
+const questions = [
+  { q: "Is it an animal?",            img: "/ass/genie1.webp" },
+  { q: "Can it fly?",                 img: "/ass/genie2.webp" },
+  { q: "Is it bigger than a car?",    img: "/ass/genie3.webp" },
+  { q: "Does it live in water?",      img: "/ass/genie4.webp" },
+  { q: "Is it a real creature?",      img: "/ass/genie5.webp" }
+];
+
+/* 2️⃣  Everything else unchanged */
+let step = 0, total = questions.length;
+const progressLabel = document.getElementById("progressLabel");
+const progressFill  = document.getElementById("progressFill");
+const questionText  = document.getElementById("questionText");
+const mascotImg     = document.getElementById("mascotImg");
+
+loadQuestion();                          // show Q1 on first load
+document.querySelectorAll("[data-btn]")
+        .forEach(btn => btn.addEventListener("click", nextQuestion));
+
+function nextQuestion() {
+  if (++step === total) return finish(); // switch to guess screen
+  loadQuestion();
+}
+
+function loadQuestion() {
+  const { q, img } = questions[step];
+  questionText.textContent  = q;
+  mascotImg.style.backgroundImage = `url(${img})`;
+  progressLabel.textContent = `Question ${step + 1} of ${total}`;
+  progressFill.style.width  = ((step + 1) / total) * 100 + "%";
+}
+
+function finish() {
+  // 👉 replace with your “Jeemboombaah!! guesses…” screen
+  alert("Jeemboombaah!! will now guess! 🎉");
+}
+</script>
+
+</body>
+</html>
